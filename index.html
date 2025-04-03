@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>aiPTO - Brain Cancer Treatment Innovation</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>aiPTO - Brain Cancer Treatment Innovation</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com" rel="preconnect"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
+<style>
         :root {
             --primary: #06b6d4;
             --secondary: #8b5cf6;
@@ -92,295 +91,184 @@
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
-    </style>
+    
+
+  #brainCanvas {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    width: 800px;
+    height: 600px;
+    max-width: 90vw;
+  }
+
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+  }
+</style>
 </head>
-
 <body class="font-sans leading-normal tracking-normal">
-
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-cyan-700 to-purple-800 text-white shadow-lg sticky-nav">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <img src="images/logo-white.png" alt="aiPTO Logo" class="h-10">
-            <ul class="flex">
-                <li class="mx-3"><a href="#" class="hover:text-cyan-200 transition duration-300">Home</a></li>
-                <li class="mx-3"><a href="#about" class="hover:text-cyan-200 transition duration-300">About</a></li>
-                <li class="mx-3"><a href="#technology" class="hover:text-cyan-200 transition duration-300">Technology</a></li>
-                <li class="mx-3"><a href="#news" class="hover:text-cyan-200 transition duration-300">News</a></li>
-                <li class="mx-3"><a href="#contact" class="hover:text-cyan-200 transition duration-300">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="relative text-center py-20 flex items-center min-h-screen">
-        <div class="absolute inset-0 overflow-hidden">
-            <div id="particle-container" class="absolute inset-0 opacity-20"></div>
-        </div>
-        <div class="container mx-auto px-6 z-10">
-            <h2 class="text-5xl font-bold text-white animate-in">Revolutionize Brain Cancer Therapy</h2>
-            <p class="mt-6 text-xl text-blue-200 max-w-2xl mx-auto animate-in delay-1">Integrating patient-derived organoids with AI to create personalized treatment solutions</p>
-            
-            <div class="mt-10 animate-in delay-2">
-                <a href="#technology" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-300">Our Technology</a>
-                <a href="#contact" class="ml-4 px-8 py-3 bg-transparent border-2 border-cyan-500 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-500 hover:text-white transition duration-300">Contact Us</a>
-            </div>
-            
-            <div class="mt-16 flex justify-center animate-in delay-3">
-                <div class="w-full max-w-3xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" class="w-full h-auto">
-                      <!-- Background -->
-                      <rect width="800" height="300" fill="#0f172a" />
-                      
-                      <!-- Grid lines -->
-                      <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
-                        <line x1="0" y1="100" x2="800" y2="100" />
-                        <line x1="0" y1="200" x2="800" y2="200" />
-                        <line x1="200" y1="0" x2="200" y2="300" />
-                        <line x1="400" y1="0" x2="400" y2="300" />
-                        <line x1="600" y1="0" x2="600" y2="300" />
-                      </g>
-                      
-                      <!-- Step 1: Patient Sample -->
-                      <circle cx="100" cy="100" r="50" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
-                      <text x="100" y="100" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Patient</text>
-                      <text x="100" y="120" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Sample</text>
-                      
-                      <!-- Arrow 1 -->
-                      <path d="M 160 100 L 180 100 L 180 100 L 200 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
-                      <polygon points="200,100 190,95 190,105" fill="#8b5cf6" />
-                      
-                      <!-- Step 2: IPTO Creation -->
-                      <rect x="220" y="50" width="160" height="100" rx="10" ry="10" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="2" />
-                      <text x="300" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Organoid</text>
-                      <text x="300" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Creation (IPTO)</text>
-                      
-                      <!-- Arrow 2 -->
-                      <path d="M 380 100 L 400 100 L 400 100 L 420 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
-                      <polygon points="420,100 410,95 410,105" fill="#8b5cf6" />
-                      
-                      <!-- Step 3: AI Analysis -->
-                      <path d="M 440 50 L 580 50 L 580 150 L 440 150 Z" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
-                      <text x="510" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">AI Analysis</text>
-                      <text x="510" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">& Prediction</text>
-                      
-                      <!-- Arrow 3 -->
-                      <path d="M 580 100 L 600 100 L 600 100 L 620 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
-                      <polygon points="620,100 610,95 610,105" fill="#8b5cf6" />
-                      
-                      <!-- Step 4: Personalized Treatment -->
-                      <circle cx="700" cy="100" r="50" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
-                      <text x="700" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Personalized</text>
-                      <text x="700" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Treatment</text>
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
-                
-                <!-- Left: Text Content -->
-                <div class="flex-1">
-                    <h3 class="text-3xl font-bold mb-6 text-cyan-300">About</h3>
-                    
-                    <p class="text-lg text-blue-100 mb-6">
-                        A spinoff from the German Cancer Research Center (DKFZ), aiPTO harnesses the disruptive Individualized Patient Tumor Organoid (IPTO) technology which replicates tumor microenvironments at the molecular level and predicts clinical outcomes for brain cancer patients.
+<!-- Header -->
+<header class="bg-gradient-to-r from-cyan-700 to-purple-800 text-white shadow-lg sticky-nav">
+<nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+<img alt="aiPTO Logo" class="h-10" src="images/logo-white.png"/>
+<ul class="flex">
+<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#">Home</a></li>
+<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#about">About</a></li>
+<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#technology">Technology</a></li>
+<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#news">News</a></li>
+<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#contact">Contact</a></li>
+</ul>
+</nav>
+</header>
+<!-- Hero Section -->
+<!-- Hero Section with Brain Animation -->
+<section class="hero-section relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
+<canvas id="brainCanvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></canvas>
+<div class="hero-content relative z-10 flex flex-col items-center justify-center text-center px-4">
+<h2 class="text-5xl md:text-6xl font-bold text-white animate-in text-center whitespace-nowrap">Revolutionize Brain Cancer Therapy</h2>
+<p class="mt-6 text-xl md:text-2xl text-blue-200 max-w-2xl mx-auto animate-in delay-1 text-center">
+      with Next-generation Patient Avatar and Generative Agentic AI
+    </p>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-16" id="about">
+<div class="container mx-auto px-6">
+<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
+<!-- Left: Text Content -->
+<div class="flex-1">
+<h3 class="text-3xl font-bold mb-6 text-cyan-300">About</h3>
+<p class="text-lg text-blue-100 mb-6">
+                        Brain tumors, both primary and metastatic, are devastating diseases where effective treatments remain elusive. More than one thousand clinical trials failed as the grand challenge being preclinical models do not translate.
+						As an official spinoff from the German Cancer Research Center (DKFZ), AIPTO tackles this grand challenge with the disruptive technology platform integrating next-generation patient avatar and generative agentic AI.
+						Our mission is to revolutionize brain cancer therapy and deliver personalized effective treatments.
                     </p>
-                    
-                    <p class="text-lg text-blue-100">
-                        Our proprietary AI platform analyzes single-cell sequencing data from these organoids to predict drug responses, identify mechanisms of action, and anticipate drug resistance patterns. This integrated approach enables truly personalized brain cancer therapy with improved efficacy and reduced time to treatment.
-                    </p>
-                </div>
-                
-                <!-- Right: IPTO Image -->
-                <div class="flex-1 flex flex-col items-center">
-                    <img src="images/IPTO.jpg" alt="Patient Avatar Histology" class="rounded-xl shadow-lg border-4 border-cyan-500 max-h-80 object-contain">
-                    <p class="text-sm text-blue-400 mt-4 text-center">
+</div>
+<!-- Right: IPTO Image -->
+<div class="flex-1 flex flex-col items-center">
+<img alt="aipto" class="rounded-xl shadow-lg w-auto h-auto max-w-xs" src="images/logo-white.png"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Avatar Section -->
+<section class="py-16" id="technology">
+<div class="container mx-auto px-6">
+<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch"><div class="flex-1 flex flex-col items-center">
+<img alt="Patient Avatar Histology" class="rounded-xl shadow-lg object-cover w-full max-w-xs h-64" src="images/IPTO.jpg"/>
+<p class="text-sm text-blue-400 mt-4 text-center">
                         IPTO: Brain organoid (green) with tumor cells (red). Source: Liu/DKFZ
                     </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technology Section -->
-    <section id="technology" class="py-16 bg-gradient-to-b from-gray-900 to-gray-800">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-10 text-cyan-300 text-center">Our Technology</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- IPTO Technology -->
-                <div class="glass p-8 rounded-lg">
-                    <h4 class="text-2xl font-semibold text-purple-400 mb-4">IPTO Platform</h4>
-                    <p class="text-blue-100 mb-6">
-                        Our Individualized Patient Tumor Organoid (IPTO) technology creates 3D replicas of patient brain tumors that preserve the complex cellular architecture and genetic profile of the original tumor.
+</div><div class="flex-1">
+<h3 class="text-3xl font-bold mb-6 text-cyan-300">Next-generation Patient Avatar</h3>
+<p class="text-lg text-blue-100 mb-6">
+                        The disruptive Individualized Patient Tumor Organoid (IPTO) technology cultures patient-derived intact tumor explants with the support from brain organoid. This next-generation patient avatar is diagnostically indistinguishable from parental tumor, replicates tumor microenvironments at the molecular level, capturing diverse cell types and interactions, and is able to predict clinical outcome for brain cancer patients.
                     </p>
-                    <ul class="space-y-2 text-blue-200">
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Recreates tumor microenvironment
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Enables high-throughput drug screening
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Generates rich single-cell sequencing data
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- AI Technology -->
-                <div class="glass p-8 rounded-lg">
-                    <h4 class="text-2xl font-semibold text-cyan-400 mb-4">AI Platform</h4>
-                    <p class="text-blue-100 mb-6">
-                        Our proprietary AI platform analyzes complex data from our organoid models to generate detailed predictions about drug responses and resistance mechanisms.
+</div></div>
+</div>
+</section>
+<!-- AI Section -->
+<section class="py-16" id="ai">
+<div class="container mx-auto px-6">
+<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
+<!-- Left: Text Content -->
+<div class="flex-1">
+<h3 class="text-3xl font-bold mb-6 text-cyan-300">Generative agentic AI</h3>
+<p class="text-lg text-blue-100 mb-6">
+                        Leveraging unique single cell data generated by the patient avatar, the generative AI system with multiple task-specific AI agents collectively decipher rich drug response data at the single cell level, reveal mechanism of action, anticipates potential resistance and recommends personalized treatment plan with counter-resistance strategies. 
                     </p>
-                    <ul class="space-y-2 text-blue-200">
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Predicts drug response at single-cell level
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Identifies mechanisms of action
-                        </li>
-                        <li class="flex items-start">
-                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            Anticipates resistance and suggests counter-strategies
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+<!-- Right: IPTO Image -->
+<div class="flex-1 flex flex-col items-center">
+<img alt="Patient Avatar Histology" class="rounded-xl shadow-lg object-cover w-full max-w-xs h-64" src="images/brain.png"/>
+</div>
+</div>
+</div>
+</section>
+<!-- News Section -->
+<section class="py-16" id="news">
+<div class="container mx-auto px-6">
+<h3 class="text-3xl font-bold mb-6 text-cyan-300">Latest News</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
+<div class="flex items-center mb-4">
+<div class="bg-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full mr-2">LATEST</div>
+<span class="text-blue-300 text-sm">February 2025</span>
+</div>
+<h4 class="text-xl font-semibold text-white">Breakthrough Brain Cancer Avatar Model Published</h4>
+<p class="text-blue-200 mt-2">aiPTO celebrates the publication of pioneering research presenting the first brain cancer avatar model capable of predicting patient responses.</p>
+<div class="mt-4">
+<a class="text-cyan-400 underline" href="https://www.dkfz.de/en/news/press-releases/detail/new-perspectives-for-personalized-therapy-of-brain-tumors" target="_blank">Read more</a>
+</div>
+</div>
+<div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
+<div class="flex items-center mb-4">
+<span class="text-blue-300 text-sm">December 2024</span>
+</div>
+<h4 class="text-xl font-semibold text-white">aiPTO Spin-Off Announced by DKFZ</h4>
+<p class="text-blue-200 mt-2">DKFZ officially announces the spin-off of aiPTO, leveraging AI and organoid technology to revolutionize brain cancer therapy.</p>
+<div class="mt-4">
+<a class="text-cyan-400 underline" href="#">Read more</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-16" id="contact">
+<div class="container mx-auto px-6">
+<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
+<!-- Left: Text Content -->
+<div class="flex-1">
+<h3 class="text-3xl font-bold mb-6 text-cyan-300">Contact</h3>
+<p class="text-lg text-blue-100 mb-6">
+                    Call for all collaborators to cure brain cancer. We welcome partnerships across academia, hospitals, and industry to accelerate our mission.
+                </p>
+<p class="text-lg text-blue-100">
+                    Reach out at <a class="text-cyan-400 underline" href="mailto:contact@aiptobio.com">contact@aiptobio.com</a>   |   <a class="text-cyan-400 underline" href="https://www.linkedin.com/company/aipto" target="_blank">LinkedIn</a>
+</p>
+</div>
+<!-- Right: Contact Image -->
+<div class="flex-1 flex flex-col items-center">
 
-    <!-- News Section -->
-    <section id="news" class="py-16">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-6 text-cyan-300">Latest News</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
-                    <div class="flex items-center mb-4">
-                        <div class="bg-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full mr-2">LATEST</div>
-                        <span class="text-blue-300 text-sm">February 2025</span>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white">Breakthrough Brain Cancer Avatar Model Published</h4>
-                    <p class="text-blue-200 mt-2">aiPTO celebrates the publication of pioneering research presenting the first brain cancer avatar model capable of predicting patient responses.</p>
-                    <div class="mt-4">
-                        <a href="https://www.dkfz.de/en/news/press-releases/detail/new-perspectives-for-personalized-therapy-of-brain-tumors" class="text-cyan-400 underline" target="_blank">Read more</a>
-                    </div>
-                </div>
-                
-                <div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
-                    <div class="flex items-center mb-4">
-                        <span class="text-blue-300 text-sm">December 2024</span>
-                    </div>
-                    <h4 class="text-xl font-semibold text-white">aiPTO Spin-Off Announced by DKFZ</h4>
-                    <p class="text-blue-200 mt-2">DKFZ officially announces the spin-off of aiPTO, leveraging AI and organoid technology to revolutionize brain cancer therapy.</p>
-                    <div class="mt-4">
-                        <a href="#" class="text-cyan-400 underline">Read more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gradient-to-b from-gray-800 to-gray-900">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-8 text-cyan-300 text-center">Contact Us</h3>
-            
-            <div class="max-w-2xl mx-auto glass p-8 rounded-lg">
-                <form>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-blue-200 mb-2">Name</label>
-                            <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
-                        </div>
-                        <div>
-                            <label for="email" class="block text-blue-200 mb-2">Email</label>
-                            <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
-                        </div>
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label for="subject" class="block text-blue-200 mb-2">Subject</label>
-                        <input type="text" id="subject" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500">
-                    </div>
-                    
-                    <div class="mb-6">
-                        <label for="message" class="block text-blue-200 mb-2">Message</label>
-                        <textarea id="message" rows="4" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold py-3 rounded-lg transition duration-300 hover:shadow-lg">Send Message</button>
-                </form>
-                
-                <div class="mt-8 pt-8 border-t border-gray-700 grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Email</h4>
-                        <p class="text-blue-300">info@aipto.com</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold text-white mb-2">Location</h4>
-                        <p class="text-blue-300">Heidelberg, Germany</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="py-12 bg-gray-900">
+<div class="container mx-auto px-6 text-center">
+<h4 class="text-xl font-semibold text-cyan-300 mb-6">Our Collaborators</h4>
+<div class="flex flex-wrap justify-center items-center gap-8">
+<img alt="DKFZ" class="h-24 object-contain mx-6" src="images/dkfz-logo.png"/>
+<img alt="NVIDIA Inception" class="h-24 object-contain mx-6" src="images/nvidia-inception-program-badge-rgb-for-screen.jpg"/>
+<img alt="AWS Activate" class="h-24 object-contain mx-6" src="images/aws-activate-logo.jpg"/>
+</div>
+</div>
+</section>
+<footer class="py-8 bg-gray-900">
+<div class="container mx-auto px-6 text-center">
+<p class="text-blue-300">© 2025 aiPTO. All rights reserved.</p>
+<div class="flex justify-center mt-4">
 
-    <!-- Footer -->
-    <footer class="py-8 bg-gray-900">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-blue-300">&copy; 2025 aiPTO. All rights reserved.</p>
-            
-            <div class="flex justify-center mt-4">
-                <a href="#" class="mx-2 text-blue-200 hover:text-white transition duration-300">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
-                    </svg>
-                </a>
-                <a href="#" class="mx-2 text-blue-200 hover:text-white transition duration-300">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.1 10.1 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                    </svg>
-                </a>
-                <a href="#" class="mx-2 text-blue-200 hover:text-white transition duration-300">
-                    <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-2 16H8v-6h2v6zM9 9.109c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zM17 16h-2v-3.501c0-.753-.255-1.499-1.296-1.499-.824 0-1.297.829-1.297 1.41V16h-2v-6h2v.976c.406-.779 1.102-1.377 2.437-1.377 1.47 0 2.156 1.043 2.156 2.942V16z"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Back to top button -->
-    <div class="back-to-top">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </div>
 
-    <script>
+</div>
+</div>
+</footer>
+<!-- Back to top button -->
+<div class="back-to-top">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 10l7-7m0 0l7 7m-7-7v18" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<script>
         // Back to top functionality
         document.addEventListener('DOMContentLoaded', function() {
             const backToTopButton = document.querySelector('.back-to-top');
@@ -412,7 +300,70 @@
             });
         });
     </script>
+<script>
+  const canvas = document.getElementById("brainCanvas");
+  const ctx = canvas.getContext("2d");
+  let width = canvas.width = canvas.offsetWidth;
+  let height = canvas.height = canvas.offsetHeight;
 
+  const nodes = [];
+  const numNodes = 120;
+  const connectionDistance = 120;
+
+  for (let i = 0; i < numNodes; i++) {
+    nodes.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      fire: 0,
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < connectionDistance) {
+          const alpha = 1 - dist / connectionDistance;
+          ctx.strokeStyle = `rgba(0, 153, 255, ${alpha * 0.4})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    for (let node of nodes) {
+      if (Math.random() < 0.01 || node.fire === 0) node.fire = Math.random() < 0.02 ? 1 : node.fire;
+
+      ctx.beginPath();
+      ctx.arc(node.x, node.y, 2.5 + 3 * node.fire, 0, Math.PI * 2);
+      ctx.fillStyle = node.fire ? "rgba(0,255,255,0.9)" : "rgba(0,102,255,0.6)";
+      ctx.shadowColor = node.fire ? "#00ffff" : "#0066ff";
+      ctx.shadowBlur = node.fire ? 20 : 10;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      if (node.fire > 0) node.fire -= 0.05;
+
+      node.x += node.vx;
+      node.y += node.vy;
+
+      if (node.x < 0 || node.x > width) node.vx *= -1;
+      if (node.y < 0 || node.y > height) node.vy *= -1;
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 </body>
-
 </html>

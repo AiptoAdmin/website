@@ -7,123 +7,434 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Next-Gen Patient Avatar & AI Predictive Models</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
     <style>
+        :root {
+            --primary: #06b6d4;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --light: #e2e8f0;
+            --accent: #10b981;
+        }
+        
         body {
             background: linear-gradient(145deg, #0f172a, #1e293b);
             color: #e2e8f0;
         }
+        
         .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
         }
+        
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(6, 182, 212, 0.2);
+        }
+        
         .tech-border {
             border-image: linear-gradient(90deg, #06b6d4, #8b5cf6) 1;
             border-width: 2px;
             border-style: solid;
         }
+        
+        /* Section transitions */
+        section {
+            transition: opacity 0.4s ease;
+        }
+        
+        /* Modern card design */
+        .tech-card {
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, rgba(6, 182, 212, 0.05), rgba(139, 92, 246, 0.05));
+        }
+        
+        /* Sticky nav */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background-color 0.3s ease;
+        }
+        
+        .sticky-nav.scrolled {
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumbs {
+            display: flex;
+            padding: 0.5rem 1rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumbs a {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+        
+        .breadcrumbs span {
+            margin: 0 0.5rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(6, 182, 212, 0.8);
+            color: white;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: rgba(6, 182, 212, 1);
+            transform: translateY(-3px);
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
     </style>
 </head>
 
 <body class="font-sans leading-normal tracking-normal">
 
     <!-- Header -->
-    <header class="bg-gradient-to-r from-cyan-700 to-purple-800 text-white shadow-lg">
+    <header class="bg-gradient-to-r from-cyan-700 to-purple-800 text-white shadow-lg sticky-nav">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <img src="images/logo-white.png" alt="aiPTO Logo" class="h-10">
             <ul class="flex">
-                <li class="mx-3"><a href="#" class="hover:text-cyan-200">Home</a></li>
-                <li class="mx-3"><a href="#about" class="hover:text-cyan-200">About</a></li>
-                <li class="mx-3"><a href="#news" class="hover:text-cyan-200">News</a></li>
-                <li class="mx-3"><a href="#contact" class="hover:text-cyan-200">Contact</a></li>
+                <li class="mx-3"><a href="#" class="hover:text-cyan-200 transition duration-300">Home</a></li>
+                <li class="mx-3"><a href="#about" class="hover:text-cyan-200 transition duration-300">About</a></li>
+                <li class="mx-3"><a href="#technology" class="hover:text-cyan-200 transition duration-300">Technology</a></li>
+                <li class="mx-3"><a href="#news" class="hover:text-cyan-200 transition duration-300">News</a></li>
+                <li class="mx-3"><a href="#research" class="hover:text-cyan-200 transition duration-300">Research</a></li>
+                <li class="mx-3"><a href="#team" class="hover:text-cyan-200 transition duration-300">Team</a></li>
+                <li class="mx-3"><a href="#contact" class="hover:text-cyan-200 transition duration-300">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="text-center py-20">
-        <div class="container mx-auto">
-            <h2 class="text-5xl font-bold text-white">Revolutionize Brain Cancer Therapy</h2>
-            <p class="mt-6 text-xl text-blue-200 max-w-2xl mx-auto">Integrating the best biological model and the best AI model creates personalized avatars and next-generation effective therapeutics</p>
+    <section class="relative text-center py-20 flex items-center min-h-screen">
+        <div class="absolute inset-0 overflow-hidden">
+            <div id="particle-container" class="absolute inset-0 opacity-20"></div>
         </div>
-    </section>
-
-
-<!-- About Section -->
-<section id="about" class="py-20">
-  <div class="container mx-auto px-6">
-    <div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
-      
-      <!-- Left: Text Content -->
-      <div class="flex-1 flex flex-col justify-between">
-        <div>
-          <h3 class="text-3xl font-bold mb-6 text-cyan-300">About</h3>
-
-		  
-		  <p class="text-lg text-blue-100 mb-6">
-            A spinoff from the German Cancer Research Center (DKFZ), aiPTO harnesses the disruptive Individualized Patient Tumor Organoid (IPTO) technology which replicates tumor microenvironments at the molecular level and is predictive of clinical outcomes. It can be applied to a wide range of tumors of the central nervous system, from aggressive brain tumors such as glioblastomas to brain metastases.
-          </p>
-
-          <p class="text-lg text-blue-100 mb-6">
-            aiPTO's proprietary generative AI technology with multiple task-specific AI agents is trained on the unique single cell sequencing data generated from IPTO. The AI agents are shown to be able to predict drug response on the single cell level, predict mechanism of action, and anticipate drug resistance and counter-resistance strategy. 
-          </p>
-
-          <p class="text-lg text-blue-100">
-            By integrating the best biological model and the best AI model, aiPTO creates a powerful platform that tailors brain cancer therapy to the unique biology of each patient. This synergy redefines personalized medicine by improving drug efficacy, predicting resistance before it emerges, and reducing the time and cost of clinical development.
-          </p>
-        </div>
-      </div>
-
-      <!-- Right: IPTO Image + Caption -->
-      <div class="flex-1 flex flex-col items-center justify-between">
-        <img src="images/IPTO.jpg" alt="Patient Avatar Histology" class="rounded-xl shadow-2xl border-4 border-cyan-500 w-full h-full max-h-[450px] object-contain">
-        <p class="text-sm text-blue-400 mt-4 text-center">
-          Microphotography of an IPTO: the brain organoid grown from pluripotent stem cells is shown in green, the cells of the mini-tumor are stained red. Source: Liu/DKFZ.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-    <!-- News Section -->
-    <section id="news" class="py-20">
-        <div class="container mx-auto px-6">
-            <h3 class="text-3xl font-bold mb-6 text-cyan-300">News</h3>
-
-            <div class="glass p-6 rounded-lg">
-                    <h4 class="text-xl font-semibold text-white">Breakthrough Brain Cancer Avatar Model Published</h4>
-                    <p class="text-blue-200">February 2025 - aiPTO celebrates the publication of pioneering research by scientific co-founder Prof. Haikun Liu, presenting the first brain cancer avatar model capable of predicting patient responses. This patient-derived organoid platform, integrated with aiPTO's generative AI, is transforming brain cancer precision medicine and drug development. <a href="https://www.linkedin.com/posts/dkfz-de_brain-tumor-organoid-activity-7295368974081445889-6A_B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAANapYsBaxKA9hpf53ivGUTGtIr2C9QuHw8" class="text-cyan-400 underline" target="_blank">View LinkedIn post</a> &nbsp;|&nbsp; <a href="https://www.dkfz.de/en/news/press-releases/detail/new-perspectives-for-personalized-therapy-of-brain-tumors" class="text-cyan-400 underline" target="_blank">Read perspectives from DKFZ</a></p>
-                </div>
-                
-                
-                <div class="glass p-6 rounded-lg">
-                    <h4 class="text-xl font-semibold text-white">aiPTO Spin-Off Announced by DKFZ</h4>
-                    <p class="text-blue-200">December 2024 - DKFZ officially announces the spin-off of aiPTO, a next-generation techbio startup leveraging AI and organoid technology to revolutionize brain cancer therapy. <a href="https://www.linkedin.com/posts/dkfz-innovation_innovation-cancerresearch-braincancer-activity-7274709937778241537-JtsR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAANapYsBaxKA9hpf53ivGUTGtIr2C9QuHw8" class="text-cyan-400 underline" target="_blank">View LinkedIn post</a></p>
+        <div class="container mx-auto px-6 z-10">
+            <h2 class="text-5xl font-bold text-white animate-in">Revolutionize Brain Cancer Therapy</h2>
+            <p class="mt-6 text-xl text-blue-200 max-w-2xl mx-auto animate-in delay-1">Integrating the best biological model and the best AI model creates personalized avatars and next-generation effective therapeutics</p>
+            
+            <div class="mt-10 animate-in delay-2">
+                <a href="#technology" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1">Our Technology</a>
+                <a href="#contact" class="ml-4 px-8 py-3 bg-transparent border-2 border-cyan-500 text-cyan-400 font-semibold rounded-lg hover:bg-cyan-500 hover:text-white transition duration-300">Contact Us</a>
+            </div>
+            
+            <div class="mt-16 flex justify-center animate-in delay-3">
+                <div class="w-full max-w-4xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" class="w-full h-auto">
+                      <!-- Background -->
+                      <rect width="800" height="400" fill="#0f172a" />
+                      
+                      <!-- Grid lines -->
+                      <g stroke="rgba(255,255,255,0.05)" stroke-width="1">
+                        <line x1="0" y1="100" x2="800" y2="100" />
+                        <line x1="0" y1="200" x2="800" y2="200" />
+                        <line x1="0" y1="300" x2="800" y2="300" />
+                        <line x1="200" y1="0" x2="200" y2="400" />
+                        <line x1="400" y1="0" x2="400" y2="400" />
+                        <line x1="600" y1="0" x2="600" y2="400" />
+                      </g>
+                      
+                      <!-- Step 1: Patient Sample -->
+                      <circle cx="100" cy="100" r="50" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="100" y="100" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Patient</text>
+                      <text x="100" y="120" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Sample</text>
+                      
+                      <!-- Arrow 1 -->
+                      <path d="M 160 100 L 180 100 L 180 100 L 200 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
+                      <polygon points="200,100 190,95 190,105" fill="#8b5cf6" />
+                      
+                      <!-- Step 2: IPTO Creation -->
+                      <rect x="220" y="50" width="160" height="100" rx="10" ry="10" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="2" />
+                      <text x="300" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Organoid</text>
+                      <text x="300" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Creation (IPTO)</text>
+                      
+                      <!-- Arrow 2 -->
+                      <path d="M 380 100 L 400 100 L 400 100 L 420 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
+                      <polygon points="420,100 410,95 410,105" fill="#8b5cf6" />
+                      
+                      <!-- Step 3: AI Analysis -->
+                      <path d="M 440 50 L 580 50 L 580 150 L 440 150 Z" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="510" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">AI Analysis</text>
+                      <text x="510" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">& Prediction</text>
+                      
+                      <!-- Arrow 3 -->
+                      <path d="M 580 100 L 600 100 L 600 100 L 620 100" stroke="#8b5cf6" stroke-width="2" fill="none" />
+                      <polygon points="620,100 610,95 610,105" fill="#8b5cf6" />
+                      
+                      <!-- Step 4: Personalized Treatment -->
+                      <circle cx="700" cy="100" r="50" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="700" y="90" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Personalized</text>
+                      <text x="700" y="110" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="14">Treatment</text>
+                      
+                      <!-- Split arrows down -->
+                      <path d="M 300 150 L 300 180 L 300 180 L 300 210" stroke="#8b5cf6" stroke-width="2" fill="none" />
+                      <polygon points="300,210 295,200 305,200" fill="#8b5cf6" />
+                      
+                      <path d="M 510 150 L 510 180 L 510 180 L 510 210" stroke="#06b6d4" stroke-width="2" fill="none" />
+                      <polygon points="510,210 505,200 515,200" fill="#06b6d4" />
+                      
+                      <!-- Step 5-6: Detailed Views -->
+                      <rect x="220" y="220" width="160" height="100" rx="10" ry="10" fill="rgba(139, 92, 246, 0.1)" stroke="#8b5cf6" stroke-width="2" />
+                      <text x="300" y="260" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="12">Single-Cell</text>
+                      <text x="300" y="280" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="12">Sequencing Data</text>
+                      
+                      <path d="M 440 220 L 580 220 L 580 320 L 440 320 Z" fill="rgba(6, 182, 212, 0.1)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="510" y="250" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="12">Drug Response</text>
+                      <text x="510" y="270" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="12">Prediction</text>
+                      <text x="510" y="290" text-anchor="middle" fill="#e2e8f0" font-family="Arial" font-size="12">Resistance Strategy</text>
+                      
+                      <!-- Connecting arrow -->
+                      <path d="M 380 270 L 400 270 L 400 270 L 420 270" stroke="#8b5cf6" stroke-width="2" fill="none" />
+                      <polygon points="420,270 410,265 410,275" fill="#8b5cf6" />
+                      
+                      <!-- Legend -->
+                      <circle cx="100" cy="350" r="10" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="120" y="355" text-anchor="start" fill="#e2e8f0" font-family="Arial" font-size="12">Biology</text>
+                      
+                      <rect x="200" y="340" width="20" height="20" fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="2" />
+                      <text x="230" y="355" text-anchor="start" fill="#e2e8f0" font-family="Arial" font-size="12">IPTO Technology</text>
+                      
+                      <path d="M 320 340 L 350 340 L 350 360 L 320 360 Z" fill="rgba(6, 182, 212, 0.2)" stroke="#06b6d4" stroke-width="2" />
+                      <text x="360" y="355" text-anchor="start" fill="#e2e8f0" font-family="Arial" font-size="12">AI Analysis</text>
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-
-<!-- Contact Section -->
-<section id="contact" class="py-20">
-  <div class="container mx-auto px-6">
-    <h3 class="text-3xl font-bold mb-6 text-cyan-300">Contact</h3>
-    <div class="glass w-full p-6 rounded-lg text-center">
-      <p class="text-blue-100 text-lg mb-6">
-        Send us an email at <a href="mailto:contact@aiptobio.com" class="text-cyan-400 underline">contact@aiptobio.com</a>
-      </p>
+    <!-- Breadcrumbs -->
+    <div class="container mx-auto px-6">
+        <div class="breadcrumbs">
+            <a href="#">Home</a>
+            <span>/</span>
+            <a href="#about">About</a>
+        </div>
     </div>
-  </div>
-</section>
 
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
+                
+                <!-- Left: Text Content -->
+                <div class="flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-bold mb-6 text-cyan-300">About</h3>
+                        
+                        <p class="text-lg text-blue-100 mb-6">
+                            A spinoff from the German Cancer Research Center (DKFZ), aiPTO harnesses the disruptive Individualized Patient Tumor Organoid (IPTO) technology which replicates tumor microenvironments at the molecular level and is predictive of clinical outcomes. It can be applied to a wide range of tumors of the central nervous system, from aggressive brain tumors such as glioblastomas to brain metastases.
+                        </p>
+                        
+                        <p class="text-lg text-blue-100 mb-6">
+                            aiPTO's proprietary generative AI technology with multiple task-specific AI agents is trained on the unique single cell sequencing data generated from IPTO. The AI agents are shown to be able to predict drug response on the single cell level, predict mechanism of action, and anticipate drug resistance and counter-resistance strategy. 
+                        </p>
+                        
+                        <p class="text-lg text-blue-100">
+                            By integrating the best biological model and the best AI model, aiPTO creates a powerful platform that tailors brain cancer therapy to the unique biology of each patient. This synergy redefines personalized medicine by improving drug efficacy, predicting resistance before it emerges, and reducing the time and cost of clinical development.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right: IPTO Image + Caption -->
+                <div class="flex-1 flex flex-col items-center justify-between">
+                    <img src="images/IPTO.jpg" alt="Patient Avatar Histology" class="rounded-xl shadow-2xl border-4 border-cyan-500 w-full h-full max-h-[450px] object-contain">
+                    <p class="text-sm text-blue-400 mt-4 text-center">
+                        Microphotography of an IPTO: the brain organoid grown from pluripotent stem cells is shown in green, the cells of the mini-tumor are stained red. Source: Liu/DKFZ.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-blue-300 text-center py-4">
-        <p>© 2025 aiPTO. Revolutionize Brain Cancer Therapy.</p>
-    </footer>
+    <!-- Technology Section -->
+    <section id="technology" class="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold mb-10 text-cyan-300 text-center">Our Technology</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- IPTO Technology -->
+                <div class="glass p-8 rounded-lg">
+                    <h4 class="text-2xl font-semibold text-purple-400 mb-4">IPTO Platform</h4>
+                    <p class="text-blue-100 mb-6">
+                        Our Individualized Patient Tumor Organoid (IPTO) technology creates miniature 3D replicas of patient brain tumors. These organoids preserve the complex cellular architecture and genetic profile of the original tumor.
+                    </p>
+                    <ul class="space-y-2 text-blue-200">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Recreates tumor microenvironment
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Preserves patient-specific cellular diversity
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Enables high-throughput drug screening
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Generates rich single-cell sequencing data
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- AI Technology -->
+                <div class="glass p-8 rounded-lg">
+                    <h4 class="text-2xl font-semibold text-cyan-400 mb-4">Generative AI Platform</h4>
+                    <p class="text-blue-100 mb-6">
+                        Our proprietary AI platform leverages multiple specialized agents to analyze complex data from our organoid models. The system generates detailed predictions about drug responses and resistance mechanisms.
+                    </p>
+                    <ul class="space-y-2 text-blue-200">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Predicts drug response at single-cell level
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Identifies mechanisms of action
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Anticipates resistance development
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-cyan-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Suggests counter-resistance strategies
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Interactive Chart -->
+            <div class="mt-16">
+                <h4 class="text-2xl font-semibold text-white mb-8 text-center">Success Rate Comparison</h4>
+                <div id="chart-container" class="w-full max-w-4xl mx-auto glass p-6 rounded-lg">
+                    <!-- Chart will be rendered here by React -->
+                </div>
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    <!-- News Section -->
+    <section id="news" class="py-20">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold mb-6 text-cyan-300">News</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-cyan-500 text-white text-xs font-bold px-3 py-1 rounded-full mr-2">LATEST</div>
+                        <span class="text-blue-300 text-sm">February 2025</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-white">Breakthrough Brain Cancer Avatar Model Published</h4>
+                    <p class="text-blue-200 mt-2">aiPTO celebrates the publication of pioneering research by scientific co-founder Prof. Haikun Liu, presenting the first brain cancer avatar model capable of predicting patient responses. This patient-derived organoid platform, integrated with aiPTO's generative AI, is transforming brain cancer precision medicine and drug development.</p>
+                    <div class="mt-4 flex">
+                        <a href="https://www.linkedin.com/posts/dkfz-de_brain-tumor-organoid-activity-7295368974081445889-6A_B?utm_source=share&utm_medium=member_desktop&rcm=ACoAAANapYsBaxKA9hpf53ivGUTGtIr2C9QuHw8" class="text-cyan-400 underline mr-4" target="_blank">View LinkedIn post</a>
+                        <a href="https://www.dkfz.de/en/news/press-releases/detail/new-perspectives-for-personalized-therapy-of-brain-tumors" class="text-cyan-400 underline" target="_blank">Read perspectives from DKFZ</a>
+                    </div>
+                </div>
+                
+                <div class="glass p-6 rounded-lg transform transition duration-300 hover:scale-105">
+                    <div class="flex items-center mb-4">
+                        <span class="text-blue-300 text-sm">December 2024</span>
+                    </div>
+                    <h4 class="text-xl font-semibold text-white">aiPTO Spin-Off Announced by DKFZ</h4>
+                    <p class="text-blue-200 mt-2">DKFZ officially announces the spin-off of aiPTO, a next-generation techbio startup leveraging AI and organoid technology to revolutionize brain cancer therapy.</p>
+                    <div class="mt-4">
+                        <a href="https://www.linkedin.com/posts/dkfz-innovation_innovation-cancerresearch-braincancer-activity-7274709937778241537-JtsR?utm_source=share&utm_medium=member_desktop&rcm=ACoAAANapYsBaxKA9hpf53ivGUTGtIr2C9QuHw8" class="text-cyan-400 underline" target="_blank">View LinkedIn post</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Publications Section -->
+    <section id="research" class="py-20 bg-gradient-to-b from-gray-800 to-gray-900">
+        <div class="container mx-auto px-6">
+            <h3 class="text-3xl font-bold mb-8 text-cyan-300">Research & Publications</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Publication 1 -->
+                <div class="glass p-6 rounded-lg">
+                    <div class="text-purple-400 text-sm font-semibold mb-2">Nature Medicine, 2025</div>
+                    <h4 class="text-xl font-semibold text-white mb-3">Patient-Derived Brain Organoids Predict Treatment Response in Glioblastoma</h4>
+                    <p class="text-blue-200 text-sm mb-4">
+                        Liu H, et al. This groundbreaking study demonstrates how the IPTO platform accurately predicts patient-specific treatment responses in glioblastoma patients.
+                    </p>
+                    <div class="mt-4">
+                        <a href="#" class="text-cyan-400 text-sm flex items-center">
+                            <span>Read Abstract</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Publication 2 -->
+                <div class="glass p-6

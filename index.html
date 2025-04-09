@@ -100,9 +100,9 @@
     transform: translateX(-50%);
     z-index: 0;
     pointer-events: none;
-    width: 800px;
-    height: 600px;
-    max-width: 90vw;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
   }
 
   .hero-section {
@@ -127,11 +127,11 @@
 </header>
 <!-- Hero Section -->
 <!-- Hero Section with Brain Animation -->
-<section class="hero-section relative w-full h-screen overflow-hidden flex items-center justify-center text-center">
+<section class="hero-section relative w-full min-h-screen overflow-hidden flex items-center justify-center text-center">
 <canvas id="brainCanvas" style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 0; pointer-events: none; width: 800px; height: 600px; max-width: 90vw;"></canvas>
 <div class="hero-content relative z-10 flex flex-col items-center justify-center text-center px-4">
-<h2 class="text-5xl md:text-6xl font-bold text-white animate-in text-center whitespace-nowrap">Revolutionize Brain Cancer Therapy</h2>
-<p class="mt-6 text-xl md:text-2xl text-blue-200 mx-auto animate-in delay-1 text-center whitespace-nowrap">
+<h2 class="text-5xl md:text-6xl font-bold text-white animate-in text-center whitespace-normal break-words">Revolutionize Brain Cancer Therapy</h2>
+<p class="mt-6 text-xl md:text-2xl text-blue-200 mx-auto animate-in delay-1 text-center whitespace-normal break-words">
       Powered by Next-generation Patient Avatar and Generative Agentic AI
     </p>
 </div>
@@ -151,7 +151,7 @@
 </div>
 <!-- Right: IPTO Image -->
 <div class="flex-1 flex flex-col items-center">
-<img alt="aipto" class="rounded-xl shadow-lg w-auto h-auto max-w-xs" src="images/logo-white.png"/>
+<img alt="aipto" class="rounded-xl shadow-lg w-full h-auto max-w-xs" src="images/logo-white.png"/>
 </div>
 </div>
 </div>
@@ -296,6 +296,12 @@
 <script>
   const canvas = document.getElementById("brainCanvas");
   const ctx = canvas.getContext("2d");
+
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+
   let width = canvas.width = window.innerWidth;
   let height = canvas.height = window.innerHeight;
 

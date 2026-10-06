@@ -114,14 +114,14 @@
 <body class="font-sans leading-normal tracking-normal">
 <!-- Header -->
 <header class="bg-gradient-to-r from-cyan-700 to-purple-800 text-white shadow-lg sticky-nav">
-<nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-<img alt="aiPTO Logo" class="h-10" src="images/logo-white.png"/>
-<ul class="flex">
-<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#">Home</a></li>
-<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#about">About</a></li>
-<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#technology">Technology</a></li>
-<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#news">News</a></li>
-<li class="mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#contact">Contact</a></li>
+<nav class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+<a class="flex-shrink-0" href="#"><img alt="aiPTO Logo" class="h-8 sm:h-10" src="images/logo-white.png"/></a>
+<ul class="flex flex-wrap justify-end text-sm sm:text-base">
+<li class="mx-3 hidden sm:block"><a class="hover:text-cyan-200 transition duration-300" href="#">Home</a></li>
+<li class="mx-2 sm:mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#about">About</a></li>
+<li class="mx-2 sm:mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#technology">Technology</a></li>
+<li class="mx-2 sm:mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#news">News</a></li>
+<li class="mx-2 sm:mx-3"><a class="hover:text-cyan-200 transition duration-300" href="#contact">Contact</a></li>
 </ul>
 </nav>
 </header>
@@ -191,14 +191,14 @@
 </div>
 </section>
 <!-- Drug discovery Section -->
-<section class="py-16" id="ai">
+<section class="py-16" id="drug-discovery">
 <div class="container mx-auto px-6">
 <div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch">
 <!-- Left: Text Content -->
 <div class="flex-1">
 <h3 class="text-3xl font-bold mb-6 text-cyan-300">Revolutionizing Drug Discovery and Precision Medicine</h3>
 <p class="text-lg text-blue-100 mb-6">
-                        Integrating patient avatars and AI, AIPTO's platform enhances success rates across the entire drug discovery and precision medicine pipelineâ€"from target discovery and lead validation to patient stratification, companion diagnostics, and personalized treatment planning. We empower strategic partners at every stage of their pipelines while advancing our own proprietary programs.
+                        Integrating patient avatars and AI, AIPTO's platform enhances success rates across the entire drug discovery and precision medicine pipeline—from target discovery and lead validation to patient stratification, companion diagnostics, and personalized treatment planning. We empower strategic partners at every stage of their pipelines while advancing our own proprietary programs.
                     </p>
 </div>
 </div></div></section>
@@ -245,7 +245,7 @@
 <!-- Contact Section -->
 <section class="py-16" id="contact">
 <div class="container mx-auto px-6">
-<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch"><div class="flex-1"><h3 class="text-3xl font-bold mb-6 text-cyan-300">Contact</h3><p class="text-lg text-blue-100 mb-6">We welcome partnerships across academia, hospitals, and industry to join in the mission to cure brain cancer.</p></div><div class="flex-1 flex flex-col items-start md:items-end text-left md:text-right"><p class="text-lg text-blue-100"><a class="text-cyan-400 underline" href="mailto:contact@aiptobio.com">contact@aiptobio.com</a> Â  | Â  <a class="text-cyan-400 underline" href="https://www.linkedin.com/company/aipto" target="_blank">LinkedIn</a></p><p class="text-lg text-blue-100 mt-4">AIPTO TechBio GmbH<br/>Aeschengraben 29<br/>4051 Basel, Switzerland</p></div></div>
+<div class="glass p-8 rounded-lg shadow-xl flex flex-col md:flex-row gap-8 items-stretch"><div class="flex-1"><h3 class="text-3xl font-bold mb-6 text-cyan-300">Contact</h3><p class="text-lg text-blue-100 mb-6">We welcome partnerships across academia, hospitals, and industry to join in the mission to cure brain cancer.</p></div><div class="flex-1 flex flex-col items-start md:items-end text-left md:text-right"><p class="text-lg text-blue-100"><a class="text-cyan-400 underline" href="mailto:contact@aiptobio.com">contact@aiptobio.com</a> &nbsp; | &nbsp; <a class="text-cyan-400 underline" href="https://www.linkedin.com/company/aipto" target="_blank">LinkedIn</a></p><p class="text-lg text-blue-100 mt-4">AIPTO TechBio GmbH<br/>Aeschengraben 29<br/>4051 Basel, Switzerland</p></div></div>
 </div>
 </section>
 <!-- Footer -->
@@ -261,7 +261,7 @@
 </section>
 <footer class="py-8 bg-gray-900">
 <div class="container mx-auto px-6 text-center">
-<p class="text-blue-300">Â© 2025 aiPTO. All rights reserved.</p>
+<p class="text-blue-300">© 2025 aiPTO. All rights reserved.</p>
 <div class="flex justify-center mt-4">
 </div>
 </div>
@@ -308,13 +308,14 @@
   const canvas = document.getElementById("brainCanvas");
   const ctx = canvas.getContext("2d");
 
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
+  // Match the drawing buffer to the canvas's displayed size so nodes aren't stretched
+  let width, height;
+  function resizeCanvas() {
+    if (canvas.clientWidth === width && canvas.clientHeight === height) return;
+    width = canvas.width = canvas.clientWidth;
+    height = canvas.height = canvas.clientHeight;
+  }
+  resizeCanvas();
 
   const nodes = [];
   const numNodes = 120;
@@ -329,6 +330,15 @@ window.addEventListener('resize', () => {
       fire: 0,
     });
   }
+
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+    // Bring nodes left outside a shrunken canvas back into view
+    for (const node of nodes) {
+      if (node.x > width) node.x = Math.random() * width;
+      if (node.y > height) node.y = Math.random() * height;
+    }
+  });
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
@@ -361,13 +371,16 @@ window.addEventListener('resize', () => {
       ctx.fill();
       ctx.shadowBlur = 0;
 
-      if (node.fire > 0) node.fire -= 0.05;
+      if (node.fire > 0) node.fire = Math.max(0, node.fire - 0.05);
 
       node.x += node.vx;
       node.y += node.vy;
 
-      if (node.x < 0 || node.x > width) node.vx *= -1;
-      if (node.y < 0 || node.y > height) node.vy *= -1;
+      // Bounce off the edges by always steering back inward, so nodes never jitter outside
+      if (node.x < 0) node.vx = Math.abs(node.vx);
+      if (node.x > width) node.vx = -Math.abs(node.vx);
+      if (node.y < 0) node.vy = Math.abs(node.vy);
+      if (node.y > height) node.vy = -Math.abs(node.vy);
     }
 
     requestAnimationFrame(draw);
